@@ -6,21 +6,26 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "npx @biomejs/biome format --write app/"
   },
   "dependencies": {
+    "@fluentui/react-charting": "^5.22.3",
+    "@fluentui/react-components": "^9.54.13",
+    "@fluentui/react-icons": "^2.0.256",
+    "next": "14.2.7",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.7"
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
+    "@biomejs/biome": "1.8.3",
+    "@types/node": "^22.5.2",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
     "eslint": "^8",
-    "eslint-config-next": "14.2.7"
+    "eslint-config-next": "14.2.7",
+    "postcss": "^8.4.44",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }
