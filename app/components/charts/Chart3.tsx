@@ -1,4 +1,4 @@
-import { IChartProps, LineChart } from "@fluentui/react-charting";
+import { type IChartProps, LineChart } from "@fluentui/react-charting";
 
 export default function Chart3() {
 	const data: IChartProps = {

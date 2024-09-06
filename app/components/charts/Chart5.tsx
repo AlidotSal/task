@@ -1,7 +1,7 @@
 import {
 	DonutChart,
-	IChartProps,
-	IChartDataPoint,
+	type IChartProps,
+	type IChartDataPoint,
 	getGradientFromToken,
 	DataVizGradientPalette,
 } from "@fluentui/react-charting";

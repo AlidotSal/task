@@ -1,6 +1,6 @@
 import {
 	VerticalBarChart,
-	IVerticalBarChartDataPoint,
+	type IVerticalBarChartDataPoint,
 } from "@fluentui/react-charting";
 
 export default function Chart2() {

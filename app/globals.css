@@ -78,7 +78,7 @@ g>rect+text+text+text,
   display: none;
 }
 
-.fui-Card + .fui-Card:nth-of-type(2) button {
+.fui-Card + .fui-Card:nth-of-type(2) button > div {
   display: none;
 }
 
