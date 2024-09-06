@@ -7,10 +7,14 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+      fontFamily: {
+        'body': ['Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'],
+    },
     colors: {
       neutral: {
-        97: "rgb(97 97 97)",
-        66: "rgb(66 66 66)",
+        'c97': "rgb(97 97 97)",
+        'c66': "rgb(66 66 66)",
+        'dp': "rgb(91 95 199)",
       },
       'purple': 'rgb(91 95 199)',
     },

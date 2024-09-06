@@ -1,12 +1,14 @@
 "use client";
+import dynamic from "next/dynamic";
 import { FluentProvider, webLightTheme } from "@fluentui/react-components";
 import List from "./components/List";
-import Card1 from "./components/cards/Card1";
-import Card2 from "./components/cards/Card2";
-import Card3 from "./components/cards/Card3";
-import Card4 from "./components/cards/Card4";
-import Card5 from "./components/cards/Card5";
-import Card6 from "./components/cards/card6";
+const Card1 = dynamic(() => import("./components/cards/Card1"));
+const Card2 = dynamic(() => import("./components/cards/Card2"));
+const Card3 = dynamic(() => import("./components/cards/Card3"));
+const Card4 = dynamic(() => import("./components/cards/Card4"));
+const Card5 = dynamic(() => import("./components/cards/Card5"));
+// const Card6 = dynamic(() => import("./components/cards/Card6"));
+import Card6 from "./components/cards/Card6";
 import Toolbar from "./components/Toolbar";
 import Nav from "./components/Nav";
 
@@ -15,11 +17,11 @@ export default function Home() {
 		<FluentProvider theme={webLightTheme}>
 			<Nav />
 			<Toolbar />
-			<div className="app">
-				<aside className="sidebar">
+			<div className="grid p-4 grid-cols-none md:grid-cols-[183px_1fr]">
+				<aside className="sidebar hidden md:block pl-px-4">
 					<List />
 				</aside>
-				<main className="content grid">
+				<main className="flex flex-wrap gap-4 md:max-w-[90%] md:p-5">
 					<Card1 />
 					<Card2 />
 					<Card3 />

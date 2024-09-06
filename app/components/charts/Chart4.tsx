@@ -1,7 +1,7 @@
 export default function Chart66() {
 	return (
 		<svg
-			className="chart4"
+			className="mt-[26px] mb-16 mx-auto"
 			width="248"
 			height="248"
 			viewBox="0 0 234 234"
