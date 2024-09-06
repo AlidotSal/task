@@ -1,7 +1,7 @@
 export default function Nav() {
 	return (
 		<>
-			<header className="px-2.5 md:px-4 flex items-center gap-2.5 md:gap-4 h-16">
+			<header className="px-2.5 md:px-4 flex items-center gap-2.5 md:gap-4 h-[60px]">
 				<img
 					className="rounded max-w-full h-8"
 					width="32"
