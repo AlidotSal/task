@@ -17,11 +17,11 @@ export default function Home() {
 		<FluentProvider theme={webLightTheme}>
 			<Nav />
 			<Toolbar />
-			<div className="grid p-4 grid-cols-none md:grid-cols-[183px_1fr]">
+			<div className="grid grid-cols-none md:grid-cols-[183px_1fr]">
 				<aside className="sidebar hidden md:block pl-4">
 					<List />
 				</aside>
-				<main className="flex flex-wrap gap-4 md:max-w-[90%] md:p-5">
+				<main className="flex flex-wrap gap-4 md:max-w-[85%] md:p-5">
 					<Card1 />
 					<Card2 />
 					<Card3 />

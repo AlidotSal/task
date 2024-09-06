@@ -32,6 +32,7 @@ img {
 }
 
 .toolbar {
+  max-width: 99.8%;
   border-block: 1px solid rgb(224 224 224);
 }
 
