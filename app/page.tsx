@@ -18,7 +18,7 @@ export default function Home() {
 			<Nav />
 			<Toolbar />
 			<div className="grid p-4 grid-cols-none md:grid-cols-[183px_1fr]">
-				<aside className="sidebar hidden md:block pl-px-4">
+				<aside className="sidebar hidden md:block pl-4">
 					<List />
 				</aside>
 				<main className="flex flex-wrap gap-4 md:max-w-[90%] md:p-5">
