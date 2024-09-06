@@ -25,7 +25,7 @@ export default function Card1() {
 			title="Chart 1"
 			description="Description"
 			footer={
-				<a className="font-semibold md:font-normal" href="#">
+				<a className="card-footer" href="#">
 					View details
 				</a>
 			}
