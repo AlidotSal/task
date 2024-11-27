@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { init } from './init.ts';
 
-const rootEl = document.getElementById('root');
+const rootEl = document.body;
 if (rootEl) {
   init();
   const root = ReactDOM.createRoot(rootEl);
