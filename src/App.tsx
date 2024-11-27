@@ -14,7 +14,7 @@ const App = () => {
       platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
     >
       <Text className="text-black dark:text-white">some text</Text>
-      <Section className="fixed bottom-0 flex gap-2 h-64 mx-4 outline outline-solid outline-neutral-600">
+      <Section className="fixed bottom-0 flex gap-2 w-full h-32 outline outline-solid outline-neutral-600 text-black dark:text-white">
         <div className="flex gap-2">
           <House />
           <p>Home</p>
