@@ -1,9 +1,8 @@
 import { useLaunchParams, miniApp, useSignal } from '@telegram-apps/sdk-react';
-
 import { AppRoot, Section, Text } from '@telegram-apps/telegram-ui';
+import { Heart, House, Search, UserRound } from 'lucide-react';
 
 import './App.css';
-import { Heart, House, Search, UserRound } from 'lucide-react';
 
 const App = () => {
   const lp = useLaunchParams();
@@ -14,7 +13,7 @@ const App = () => {
       platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
     >
       <Text className="text-black dark:text-white">some text</Text>
-      <Section className="fixed bottom-0 flex gap-2 w-full h-32 outline outline-solid outline-neutral-600 text-black dark:text-white">
+      <Section className="fixed bottom-0 flex gap-2 w-full h-16 p-2 outline outline-solid outline-neutral-600 text-black dark:text-white">
         <div className="flex gap-2">
           <House />
           <p>Home</p>
