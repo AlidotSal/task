@@ -12,9 +12,7 @@ const App = () => {
       appearance={isDark ? 'dark' : 'light'}
       platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
     >
-      <div>
-        <Text>some text</Text>
-      </div>
+      <Text className="text-black dark:text-white">some text</Text>
     </AppRoot>
   );
 };
