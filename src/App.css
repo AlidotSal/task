@@ -9,3 +9,7 @@
 body {
   margin: 0;
 }
+
+.bg {
+  z-index: -1;
+}
