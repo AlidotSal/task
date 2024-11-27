@@ -3,32 +3,48 @@ import { AppRoot, Text } from '@telegram-apps/telegram-ui';
 import { Heart, House, Search, UserRound } from 'lucide-react';
 
 import './App.css';
+import { useState } from 'react';
 
 const App = () => {
   const lp = useLaunchParams();
   const isDark = useSignal(miniApp.isDark);
+  const [selected, setSelected] = useState('home');
   return (
     <AppRoot
       appearance={isDark ? 'dark' : 'light'}
       platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
     >
       <Text className="text-black dark:text-white">some text</Text>
-      <section className="fixed bottom-0 grid grid-cols-4 gap-2 w-full h-16 p-2 outline outline-solid outline-neutral-600 text-black dark:text-white">
-        <div className="flex gap-2">
+      <section className="fixed bottom-0 grid grid-cols-4 gap-4 w-full h-20 p-2 outline outline-solid outline-neutral-600 text-black dark:text-white">
+        <div
+          className={`flex gap-2 ${selected === 'home' ? 'bg-neutral-900' : ''}`}
+          onPointerDown={() => setSelected('home')}
+        >
           <House />
-          <p>Home</p>
+          {selected === 'home' ? <p>Home</p> : null}
         </div>
-        <div className="flex gap-2">
+        <div
+          className={`flex gap-2 ${selected === 'home' ? 'bg-neutral-900' : ''}`}
+          onPointerDown={() => setSelected('search')}
+        >
           <Search />
-          <p>Search</p>
+          {selected === 'search' ? <p>Search</p> : null}
         </div>
-        <div className="flex gap-2">
+        <div
+          className={`flex gap-2 ${selected === 'home' ? 'bg-neutral-900' : ''}`}
+          onPointerDown={() => setSelected('likes')}
+        >
           <Heart />
-          <p>Likes</p>
+          {selected === 'likes' ? <p>Likes</p> : null}
         </div>
-        <div>
+        <div
+          className={`flex gap-2 ${selected === 'home' ? 'bg-neutral-900' : ''}`}
+          onPointerDown={() => setSelected('user')}
+        >
           <UserRound />
-          <a href="https://t.me/ASGKh2Bot/Task">App</a>
+          {selected === 'user' ? (
+            <a href="https://t.me/ASGKh2Bot/Task">App</a>
+          ) : null}
         </div>
       </section>
     </AppRoot>
