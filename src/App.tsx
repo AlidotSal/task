@@ -28,7 +28,7 @@ const App = () => {
       appearance={isDark ? 'dark' : 'light'}
       platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
     >
-      <div className="w-full h-full bg-black/4 dark:bg-black/90">
+      <div className="w-full h-full">
         {selected === 0 && <Home />}
         {selected === 1 && <Game />}
         {selected === 2 && <Pay />}

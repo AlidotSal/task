@@ -165,7 +165,6 @@ export default () => {
   }, [started]);
 
   useEffect(() => {
-    console.log('effect');
     const id = setInterval(() => {
       setStars([
         {
@@ -313,7 +312,7 @@ export default () => {
   };
 
   return (
-    <div className="game w-full h-full">
+    <div className="game overflow-hidden w-full h-full">
       {started ? (
         <div ref={starsRef}>
           {stars.map((s) => (

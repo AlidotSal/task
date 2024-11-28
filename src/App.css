@@ -19,6 +19,11 @@ body {
   height: 100%;
 }
 
+body > div {
+  background-image: url("./assets/bg.jpg");
+  background-size: cover;
+}
+
 .bg {
   z-index: -1;
 }
