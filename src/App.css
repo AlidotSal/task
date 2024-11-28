@@ -2,14 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  height: 100dvh;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
+  height: 100%;
   margin: 0;
+}
+
+#root {
+  height: 100%;
 }
 
 .bg {
   z-index: -1;
+}
+
+svg {
+  filter: drop-shadow(0 0 22px rgb(0 0 0));
+}
+
+svg:active {
+  filter: drop-shadow(0 0 7px rgb(0 0 0));
 }
