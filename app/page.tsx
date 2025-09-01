@@ -3,7 +3,7 @@ import PaginationControls from "@/components/PaginationControls";
 import ProductCard from "@/components/ProductCard";
 import type { ApiResponse } from "@/types";
 
-const PAGE_LIMIT = 10;
+const PAGE_LIMIT = 12;
 
 async function fetchProducts(page: number): Promise<ApiResponse> {
   const skip = (page - 1) * PAGE_LIMIT;
@@ -36,7 +36,7 @@ export default async function HomePage({
         Our Products
       </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {data.products.map((product) => (
           <Link
             key={product.id}

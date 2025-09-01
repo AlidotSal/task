@@ -120,39 +120,41 @@ export default function ProductDetail() {
             )}
           </div>
 
-          <dl className="space-y-2 mb-6">
-            <div className="flex">
-              <dt className="font-semibold w-32">Category:</dt>
-              <dd>{product.category}</dd>
-            </div>
-            <div className="flex">
-              <dt className="font-semibold w-32">Brand:</dt>
-              <dd>{product.brand}</dd>
-            </div>
-            <div className="flex">
-              <dt className="font-semibold w-32">Stock:</dt>
-              <dd>{product.stock} available</dd>
-            </div>
-            <div className="flex">
-              <dt className="font-semibold w-32">Warranty:</dt>
-              <dd>{product.warrantyInformation}</dd>
-            </div>
-            <div className="flex">
-              <dt className="font-semibold w-32">Shipping:</dt>
-              <dd>{product.shippingInformation}</dd>
-            </div>
-            <div className="flex">
-              <dt className="font-semibold w-32">Return Policy:</dt>
-              <dd>{product.returnPolicy}</dd>
-            </div>
-          </dl>
+          <div className="flex items-end gap-16 mb-3">
+            <dl className="space-y-2">
+              <div className="flex">
+                <dt className="font-semibold w-32">Category:</dt>
+                <dd>{product.category}</dd>
+              </div>
+              <div className="flex">
+                <dt className="font-semibold w-32">Brand:</dt>
+                <dd>{product.brand}</dd>
+              </div>
+              <div className="flex">
+                <dt className="font-semibold w-32">Stock:</dt>
+                <dd>{product.stock} available</dd>
+              </div>
+              <div className="flex">
+                <dt className="font-semibold w-32">Warranty:</dt>
+                <dd>{product.warrantyInformation}</dd>
+              </div>
+              <div className="flex">
+                <dt className="font-semibold w-32">Shipping:</dt>
+                <dd>{product.shippingInformation}</dd>
+              </div>
+              <div className="flex">
+                <dt className="font-semibold w-32">Return Policy:</dt>
+                <dd>{product.returnPolicy}</dd>
+              </div>
+            </dl>
 
-          <button
-            type="button"
-            className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-          >
-            Add to Cart
-          </button>
+            <button
+              type="button"
+              className="w-48 h-12 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+            >
+              Add to Cart
+            </button>
+          </div>
         </div>
       </div>
 
