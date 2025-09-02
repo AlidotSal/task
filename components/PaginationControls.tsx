@@ -11,7 +11,7 @@ export default function PaginationControls({
 
   return (
     <div className="flex justify-center items-center gap-4 my-8">
-      <Link href={`/?page=${currentPage - 1}`}>
+      <Link href={currentPage - 1 === 1 ? "/" : `/?page=${currentPage - 1}`}>
         <button type="button" className={buttonClasses} disabled={!hasPrevPage}>
           &larr; Prev
         </button>

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import type { Product } from "@/types";
 
 const getProduct = async (id: string): Promise<Product> => {
@@ -27,6 +28,12 @@ export default function ProductDetail() {
     queryKey: ["product", id],
     queryFn: () => getProduct(id),
   });
+
+  useEffect(() => {
+    if (product?.title) {
+      document.title = `${product.title} - product info`;
+    }
+  }, [product?.title]);
 
   if (isLoading) {
     return (
@@ -55,7 +62,7 @@ export default function ProductDetail() {
   return (
     <div className="container mx-auto px-4 py-8">
       <Link
-        href={`/?page=${fromPage}`}
+        href={fromPage === "1" ? "/" : `/?page=${fromPage}`}
         className="text-blue-500 hover:underline mb-4 inline-block"
       >
         &larr; Back to Products
