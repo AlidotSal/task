@@ -34,24 +34,29 @@ cd task</code></pre>
 <p>این پروژه با هدف ساخت یک برنامه سریع، بهینه و قابل نگهداری (Maintainable) توسعه داده شده است. معماری آن بر پایه ابزارهای مدرن اکوسیستم React شکل گرفته و تلاش شده است تا با کمترین وابستگی‌های خارجی، بهترین نتیجه حاصل شود.</p>
 
 <ul style="direction: rtl; text-align: right;">
-  <li dir="rtl"><strong>Next.js (App Router):</strong><br>
-    به عنوان فریمورک اصلی انتخاب شد زیرا قابلیت‌های فوق‌العاده‌ای مانند رندرینگ سمت سرور (SSR)، بهینه‌سازی خودکار (Code Splitting) و یک ساختار فایل-محور برای روتینگ ارائه می‌دهد. استفاده از App Router به ما اجازه داد تا از جدیدترین ویژگی‌های React مانند Server Components بهره ببریم که به کاهش حجم باندل جاوااسکریپت در کلاینت و افزایش سرعت بارگذاری اولیه کمک شایانی می‌کند.
+  <li dir="rtl">
+    <strong><span dir="ltr">Next.js (App Router)</span>:</strong><br>
+    به عنوان فریمورک اصلی انتخاب شد زیرا قابلیت‌های فوق‌العاده‌ای مانند رندرینگ سمت سرور (<span dir="ltr">SSR</span>)، بهینه‌سازی خودکار (<span dir="ltr">Code Splitting</span>) و یک ساختار فایل‌محور برای روتینگ ارائه می‌دهد. استفاده از <span dir="ltr">App Router</span> به ما اجازه داد تا از جدیدترین ویژگی‌های <span dir="ltr">React</span> مانند <span dir="ltr">Server Components</span> بهره ببریم که به کاهش حجم باندل جاوااسکریپت در کلاینت و افزایش سرعت بارگذاری اولیه کمک شایانی می‌کند.
   </li>
 
-  <li dir="rtl"><strong>TanStack Query (React Query):</strong><br>
-    برای مدیریت وضعیت سرور (Server State) و کشینگ داده‌ها انتخاب شد. به جای استفاده از یک State Manager عمومی، این کتابخانه به طور تخصصی برای مدیریت چرخه‌ی عمر داده‌های دریافتی از API (شامل fetching, caching, synchronizing, and updating) طراحی شده است. این انتخاب باعث شد تا از نوشتن کدهای تکراری برای مدیریت وضعیت‌های loading, error و data جلوگیری شود و کد نهایی بسیار تمیزتر و خواناتر باشد. قابلیت‌هایی مانند refetchInterval و staleTime به سادگی به ما امکان کنترل کش و به‌روزرسانی داده‌ها را دادند.
+  <li dir="rtl">
+    <strong><span dir="ltr">TanStack Query (React Query)</span>:</strong><br>
+    برای مدیریت وضعیت سرور (<span dir="ltr">Server State</span>) و کشینگ داده‌ها انتخاب شد. به جای استفاده از یک <span dir="ltr">State Manager</span> عمومی، این کتابخانه به طور تخصصی برای مدیریت چرخه‌ی عمر داده‌های دریافتی از <span dir="ltr">API</span> (شامل <span dir="ltr">fetching</span>، <span dir="ltr">caching</span>، <span dir="ltr">synchronizing</span> و <span dir="ltr">updating</span>) طراحی شده است. این انتخاب باعث شد تا از نوشتن کدهای تکراری برای مدیریت وضعیت‌های <span dir="ltr">loading</span>، <span dir="ltr">error</span> و <span dir="ltr">data</span> جلوگیری شود و کد نهایی بسیار تمیزتر و خواناتر باشد. قابلیت‌هایی مانند <span dir="ltr">refetchInterval</span> و <span dir="ltr">staleTime</span> به سادگی به ما امکان کنترل کش و به‌روزرسانی داده‌ها را دادند.
   </li>
 
-  <li dir="rtl"><strong>IndexedDB (با پکیج idb):</strong><br>
-    طبق الزامات پروژه، نیاز به ذخیره‌سازی داده‌ها در سمت کاربر وجود داشت. IndexedDB به دلیل قابلیت ذخیره‌سازی حجم بالایی از داده‌های ساختاریافته، بهترین گزینه بود. برای ساده‌سازی کار با API نسبتاً پیچیده‌ی آن، از پکیج سبک و Promise-based idb استفاده شد که کدنویسی را بسیار ساده‌تر و خواناتر کرد.
+  <li dir="rtl">
+    <strong><span dir="ltr">IndexedDB</span> (با پکیج <span dir="ltr">idb</span>):</strong><br>
+    طبق الزامات پروژه، نیاز به ذخیره‌سازی داده‌ها در سمت کاربر وجود داشت. <span dir="ltr">IndexedDB</span> به دلیل قابلیت ذخیره‌سازی حجم بالایی از داده‌های ساختاریافته، بهترین گزینه بود. برای ساده‌سازی کار با API نسبتاً پیچیده‌ی آن، از پکیج سبک و <span dir="ltr">Promise-based</span> <span dir="ltr">idb</span> استفاده شد که کدنویسی را بسیار ساده‌تر و خواناتر کرد.
   </li>
 
-  <li dir="rtl"><strong>Tailwind CSS:</strong><br>
-    این فریمورک Utility-first برای استایل‌دهی انتخاب شد زیرا سرعت توسعه UI را به شدت افزایش می‌دهد و از نوشتن CSS تکراری جلوگیری می‌کند. با استفاده از کامپایلر Just-in-Time (JIT)، تنها کلاس‌های استفاده شده در خروجی نهایی قرار می‌گیرند که منجر به یک فایل CSS بسیار کم‌حجم و بهینه می‌شود. همچنین، پیاده‌سازی طراحی واکنش‌گرا (Responsive Design) با آن بسیار ساده و قابل مدیریت است.
+  <li dir="rtl">
+    <strong><span dir="ltr">Tailwind CSS</span>:</strong><br>
+    این فریمورک <span dir="ltr">Utility-first</span> برای استایل‌دهی انتخاب شد زیرا سرعت توسعه UI را به شدت افزایش می‌دهد و از نوشتن <span dir="ltr">CSS</span> تکراری جلوگیری می‌کند. با استفاده از کامپایلر <span dir="ltr">Just-in-Time (JIT)</span>، تنها کلاس‌های استفاده شده در خروجی نهایی قرار می‌گیرند که منجر به یک فایل <span dir="ltr">CSS</span> بسیار کم‌حجم و بهینه می‌شود. همچنین، پیاده‌سازی طراحی واکنش‌گرا (<span dir="ltr">Responsive Design</span>) با آن بسیار ساده و قابل مدیریت است.
   </li>
 
-  <li dir="rtl"><strong>ساختار پروژه و اصول کدنویسی:</strong><br>
-    ساختار پوشه‌بندی از الگوی استاندارد پروژه‌های Next.js با App Router پیروی می‌کند که به تفکیک منطقی کامپوننت‌ها، سرویس‌ها و هوک‌ها کمک می‌کند. تمام کدها با رعایت اصول Clean Code و به صورت ماژولار نوشته شده‌اند تا نگهداری و توسعه‌ی آینده‌ی پروژه به آسانی امکان‌پذیر باشد.
+  <li dir="rtl">
+    <strong>ساختار پروژه و اصول کدنویسی:</strong><br>
+    ساختار پوشه‌بندی از الگوی استاندارد پروژه‌های <span dir="ltr">Next.js</span> با <span dir="ltr">App Router</span> پیروی می‌کند که به تفکیک منطقی کامپوننت‌ها، سرویس‌ها و هوک‌ها کمک می‌کند. تمام کدها با رعایت اصول <span dir="ltr">Clean Code</span> و به صورت ماژولار نوشته شده‌اند تا نگهداری و توسعه‌ی آینده‌ی پروژه به آسانی امکان‌پذیر باشد.
   </li>
 </ul>
 
