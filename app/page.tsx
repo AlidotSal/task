@@ -1,8 +1,8 @@
 "use client";
 
 import { CryptoTable } from "@/components/crypto/CryptoTable";
-import Pagination from "@/components/ui/Pagination";
-import Popup from "@/components/ui/Popup";
+import { Pagination } from "@/components/ui/Pagination";
+import { Popup } from "@/components/ui/Popup";
 import { useCryptoData } from "@/hooks";
 
 export default function HomePage() {

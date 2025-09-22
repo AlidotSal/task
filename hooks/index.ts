@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { fetchCryptos } from "@/lib/api";
 import { getCoinsFromDB, saveCoinsToDB } from "@/lib/indexedDB";
 import type { Theme } from "@/types";
@@ -67,13 +67,13 @@ export const useCryptoData = () => {
       return newCoins;
     },
     enabled: !isLoadingFromDB,
-    refetchInterval: 10000,
+    refetchInterval: 1000,
     refetchIntervalInBackground: true,
   });
 
-  const addPage = () => {
+  const addPage = useCallback(() => {
     setPage((prev) => prev + 1);
-  };
+  }, []);
 
   return { ...query, page, addPage, setPage };
 };

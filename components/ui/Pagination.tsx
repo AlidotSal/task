@@ -1,33 +1,29 @@
+import { memo } from "react";
+
 interface Props {
   page: number;
   addPage: () => void;
   setPage: (p: number) => void;
   isPending: boolean;
 }
-const Pagination = ({ page, addPage, setPage, isPending }: Props) => {
+export const Pagination = memo(({ page, addPage, setPage, isPending }: Props) => {
   const showPageNumbers = page > 0;
 
-  const generatePageNumbers = () => {
-    const pages = [];
-    let startPage = Math.max(1, page - Math.floor(5 / 2));
-    const endPage = Math.min(100, startPage + 5 - 1);
-
-    if (endPage - startPage + 1 < 5) {
-      startPage = Math.max(1, endPage - 5 + 1);
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      pages.push(i);
-    }
-
-    return pages;
-  };
+  const pages = [];
+  let startPage = Math.max(1, page - Math.floor(5 / 2));
+  const endPage = Math.min(100, startPage + 5 - 1);
+  if (endPage - startPage + 1 < 5) {
+    startPage = Math.max(1, endPage - 5 + 1);
+  }
+  for (let i = startPage; i <= endPage; i++) {
+    pages.push(i);
+  }
 
   return (
     <div className="flex justify-center mt-4">
       {showPageNumbers ? (
         <div className="flex items-center gap-2">
-          {generatePageNumbers().map((pageNum) => (
+          {pages.map((pageNum) => (
             <button
               key={pageNum}
               type="button"
@@ -55,5 +51,4 @@ const Pagination = ({ page, addPage, setPage, isPending }: Props) => {
       )}
     </div>
   );
-};
-export default Pagination;
+});

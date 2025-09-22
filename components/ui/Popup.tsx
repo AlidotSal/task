@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useTheme } from "@/hooks";
 
-const Popup = () => {
+export const Popup = () => {
   const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [currency, setCurrency] = useState("usd");
@@ -96,5 +96,3 @@ const Popup = () => {
     </>
   );
 };
-
-export default Popup;
