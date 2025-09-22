@@ -67,7 +67,7 @@ export const useCryptoData = () => {
       return newCoins;
     },
     enabled: !isLoadingFromDB,
-    refetchInterval: 1000,
+    refetchInterval: 10000,
     refetchIntervalInBackground: true,
   });
 

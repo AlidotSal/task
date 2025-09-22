@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { memo } from "react";
 import type { CryptoCurrency } from "@/types";
 import { SkeletonRow } from "../ui/Skeleton";
 
@@ -7,7 +8,7 @@ interface CryptoTableProps {
   isLoading: boolean;
 }
 
-export const CryptoTable = ({ coins, isLoading }: CryptoTableProps) => {
+export const CryptoTable = memo(({ coins, isLoading }: CryptoTableProps) => {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full">
@@ -72,4 +73,4 @@ export const CryptoTable = ({ coins, isLoading }: CryptoTableProps) => {
       </table>
     </div>
   );
-};
+});

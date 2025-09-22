@@ -15,9 +15,9 @@ export default function HomePage() {
   return (
     <main className="relative container mx-auto p-1 md:p-8">
       <Popup />
-      <h1 className="text-3xl font-bold mb-12">Cryptocurrency Prices</h1>
+      <h1 className="text-3xl font-bold mb-24">Cryptocurrency Prices</h1>
 
-      <CryptoTable coins={coins || []} isLoading={isLoading} />
+      <CryptoTable coins={coins} isLoading={isLoading} />
 
       <Pagination page={page} addPage={addPage} setPage={setPage} isPending={isPending} />
     </main>
