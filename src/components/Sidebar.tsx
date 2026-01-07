@@ -15,6 +15,7 @@ export const Sidebar = () => {
             placeholder="Search by city or station..."
             className="w-full pl-10 pr-4 py-2 outline-1 outline-solid outline-neutral-500 rounded-md focus:ring-2 focus:ring-blue-500 outline-none transition-all"
             value={searchQuery}
+            name='search'
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>

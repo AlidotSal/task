@@ -5,8 +5,8 @@ import {Sidebar} from '../src/components/Sidebar'
 test('renders name', async () => {
   const { getByText, getByRole } = await render(<Sidebar />)
 
-  await expect.element(getByText('Hello Vitest x1!')).toBeInTheDocument()
-  await getByRole('button', { name: 'Increment '}).click()
+  await expect.element(getByText('Munich Ost')).toBeInTheDocument()
+  await getByRole('textbox', { name: 'search '}).fill("Berlin")
 
-  await expect.element(getByText('Hello Vitest x2!')).toBeInTheDocument()
+  await expect.element(getByText('Munich Ost')).not.toBeInTheDocument()
 })
