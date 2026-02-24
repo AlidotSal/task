@@ -9,6 +9,7 @@ import TabLimit from "@/components/layout/TabLimit";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Clarity from '@microsoft/clarity';
+import HowToUse from "@/components/features/followed-wallets/HowToUse";
 
 
 
@@ -70,7 +71,7 @@ export default function RootLayout({
                   </div>
                 }
               ></TabLimit>
-
+              <HowToUse />
               <Footer />
             </main>
           </div>

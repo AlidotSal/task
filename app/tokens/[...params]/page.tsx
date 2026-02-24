@@ -9,7 +9,6 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
 } from "@/components/ui/breadcrumb";
-import HowToUse from "@/components/features/followed-wallets/HowToUse";
 import { TOKEN_PAGE_PARAMS } from "@/utils/pageParams";
 import { minifyContract } from "@/utils/truncate";
 
@@ -222,7 +221,6 @@ export default async function Token({ params }: Props) {
             </HiddenElementForSeo>
           </>
         )}
-      <HowToUse />
     </div>
   );
 }

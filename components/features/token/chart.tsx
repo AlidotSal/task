@@ -83,6 +83,8 @@ export default function Chart({
   className,
 }: Props) {
   const [isScriptReady, setIsScriptReady] = useState(false);
+  const [secondaryToken, setSecondaryToken] = useState<string | null>(null);
+  const [secondaryOhlcvData, setSecondaryOhlcvData] = useState<IOhlcvData[]>([]);
 
   const fetchData = async (
     timeframe: string,
@@ -116,6 +118,55 @@ export default function Chart({
       queryFn: () => fetchData("day", 1),
     });
 
+const { data: secondaryMinuteData, isSuccess: isSecondaryMinuteSuccess } =
+  useQuery<IDatafeed>({
+    queryKey: ["secondaryOhlcvData", "minute", secondaryToken, network],
+    queryFn: () =>
+      getDataFeed({
+        params: {
+          contractAddress: secondaryToken,
+          network,
+          timeframe: "minute",
+          aggregate: 5,
+        },
+      }),
+    enabled: !!secondaryToken,
+  });
+
+const { data: secondaryHourData, isSuccess: isSecondaryHourSuccess } =
+  useQuery<IDatafeed>({
+    queryKey: ["secondaryOhlcvData", "hour", secondaryToken, network],
+    queryFn: () =>
+      getDataFeed({
+        params: {
+          contractAddress: secondaryToken,
+          network,
+          timeframe: "hour",
+          aggregate: 1,
+        },
+      }),
+    enabled: !!secondaryToken,
+  });
+
+const { data: secondaryDayData, isSuccess: isSecondaryDaySuccess } =
+  useQuery<IDatafeed>({
+    queryKey: ["secondaryOhlcvData", "day", secondaryToken, network],
+    queryFn: () =>
+      getDataFeed({
+        params: {
+          contractAddress: secondaryToken,
+          network,
+          timeframe: "day",
+          aggregate: 1,
+        },
+      }),
+    enabled: !!secondaryToken,
+  });
+  const isSecondarySuccess =
+  isSecondaryMinuteSuccess &&
+  isSecondaryHourSuccess &&
+  isSecondaryDaySuccess;
+
   const getOhlcvData = (data: IDatafeed): IOhlcvData[] => {
     if (!data.data) return [];
     return data.data.attributes.ohlcv_list
@@ -129,6 +180,12 @@ export default function Chart({
       }))
       .sort((a, b) => a.time - b.time);
   };
+
+  const getLineData = (data: IOhlcvData[]) =>
+  data.map((item) => ({
+    time: item.time,
+    value: item.close,
+  }));
 
   const mergeData = (
     minuteData: IOhlcvData[],
@@ -208,6 +265,39 @@ export default function Chart({
       );
     }
   }, [minuteDatafeed, hourDatafeed, dayDatafeed, isSuccess]);
+  useEffect(() => {
+      if (!secondaryToken) {
+    setSecondaryOhlcvData([]);
+    return;
+  }
+if (
+  !secondaryMinuteData ||
+  !secondaryHourData ||
+  !secondaryDayData
+) {
+  return;
+}
+
+  const dailyResolutions = ["1440", "D", "3D", "W", "M"];
+  const currentInterval = defaultWidgetProps.interval || "4H";
+
+  if (dailyResolutions.includes(currentInterval)) {
+    setSecondaryOhlcvData(getOhlcvData(secondaryDayData!));
+  } else {
+    setSecondaryOhlcvData(
+      mergeData(
+        getOhlcvData(secondaryMinuteData!),
+        getOhlcvData(secondaryHourData!),
+        getOhlcvData(secondaryDayData!)
+      )
+    );
+  }
+}, [
+  secondaryToken,
+  secondaryMinuteData,
+  secondaryHourData,
+  secondaryDayData,
+]);
 
   const { theme } = useTheme();
 
@@ -223,6 +313,17 @@ export default function Chart({
       />
       {isSuccess && ohlcvData.length > 0 ? (
         <div className="h-full w-full my-6 md:my-7">
+          <select
+            className="mb-4 border rounded p-2"
+            onChange={(e) => {
+              setSecondaryToken(e.target.value || null)}
+            }
+            defaultValue=""
+          >
+            <option value="">Select secondary token</option>
+            <option value="0x5ab53ee1d50eef2c1dd3d5402789cd27bb52c1bb">AAVE</option>
+            <option value="0xa2376a5304cfcd238f52db5677cba3e0559f7f09">DAI</option>
+          </select>
           <MyTradingView
             chartOptions={{
               ...defaultWidgetProps,
@@ -232,6 +333,8 @@ export default function Chart({
                 minuteDatafeed!.meta.quote.symbol,
             }}
             ohlcvData={ohlcvData}
+            secondaryOhlcvData={secondaryOhlcvData}
+            secondarySymbol={secondaryToken || undefined}
             theme={theme === "dark" ? "dark" : "light"}
             tokenExchange={tokenExchange}
             tokenDescription={tokenDescription}

@@ -37,3 +37,48 @@ export const formatCash = (number: number, toFixed = 1) => {
       ? -1 * +(n / 1e12).toFixed(toFixed) + "T"
       : +(n / 1e12).toFixed(toFixed) + "T";
 };
+
+const SUBSCRIPT_MAP: Record<string, string> = {
+  "0": "₀","1": "₁","2": "₂","3": "₃","4": "₄",
+  "5": "₅","6": "₆","7": "₇","8": "₈","9": "₉",
+};
+
+function toSubscript(num: number): string {
+  return num
+    .toString()
+    .split("")
+    .map((d) => SUBSCRIPT_MAP[d] ?? "")
+    .join("");
+}
+
+export function formatChart(
+  value: number,
+  significantDigits: number = 3
+): string {
+  if (!isFinite(value)) return "–";
+
+  if (value === 0) return "0";
+
+  const sign = value < 0 ? "-" : "";
+  const abs = Math.abs(value);
+
+  if (abs >= 1) {
+    return sign + abs.toLocaleString("en-US", {
+      maximumFractionDigits: 8,
+    });
+  }
+
+  // جلوگیری از scientific notation
+  const normalized = abs.toFixed(18).replace(/0+$/, "");
+
+  const match = normalized.match(/^0\.(0+)(\d+)/);
+
+  if (!match) {
+    return sign + normalized;
+  }
+
+  const zeroCount = match[1].length;
+  const significantPart = match[2].slice(0, significantDigits);
+
+  return `${sign}0.0${zeroCount > 1 ? toSubscript(zeroCount) : ""}${significantPart}`;
+}

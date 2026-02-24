@@ -8,10 +8,13 @@ import {
 } from "@/public/static/charting_library";
 import { IOhlcvData } from "@/types/datafeed.type";
 import { usePathname } from "next/navigation";
+import { formatChart } from "@/utils/numbers";
 
 interface Props {
   chartOptions: Partial<ChartingLibraryWidgetOptions>;
   ohlcvData: IOhlcvData[];
+  secondaryOhlcvData?: IOhlcvData[];
+  secondarySymbol?: string;
   className?: string;
   tokenDescription: string;
   tokenExchange: string;
@@ -28,6 +31,8 @@ let intervalId: NodeJS.Timeout;
 const MyTradingView = ({
   chartOptions,
   ohlcvData,
+  secondaryOhlcvData,
+  secondarySymbol,
   theme,
   tokenDescription,
   tokenExchange,
@@ -37,6 +42,8 @@ const MyTradingView = ({
     useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
   const [chartIsReady, setChartIsReady] = useState(false);
   const myWidget = useRef<any>();
+  const compareStudyRef = useRef<any>(null);
+  const [compareSymbol, setCompareSymbol] = useState<string | null>(null);
   const pathname = usePathname();
 
   const dataFeed = (
@@ -71,15 +78,47 @@ const MyTradingView = ({
         );
       },
       resolveSymbol: (symbolName, onSymbolResolvedCallback) => {
+        console.log("Resolving symbol:", symbolName);
         setTimeout(() => {
+          const isSecondary = symbolName === "SECONDARY";
+            if (!symbolName) {
+    return;
+  }
+
+  if (symbolName === "SECONDARY") {
+    onSymbolResolvedCallback({
+      name: "SECONDARY",
+      description: isSecondary
+              ? "Comparison Token"
+              : tokenDescription,
+      exchange: tokenExchange,
+      timezone: "Etc/UTC",
+      minmov: 1,
+      session: "24x7",
+      has_intraday: true,
+      has_daily: true,
+      has_weekly_and_monthly: true,
+      type: "crypto",
+      pricescale: 100000000,
+      ticker: "SECONDARY",
+      listed_exchange: "Listed exchange",
+      format: "price",
+      supported_resolutions: ["1", "5", "15", "60", "240", "1D"] as ResolutionString[],
+    });
+    return;
+  }
           onSymbolResolvedCallback({
             name: symbolName,
-            description: tokenDescription,
+            description: isSecondary
+              ? "Comparison Token"
+              : tokenDescription,
             exchange: tokenExchange,
             timezone: "Etc/UTC",
             minmov: 1,
             session: "24x7",
             has_intraday: true,
+            has_daily: true,
+            has_weekly_and_monthly: true,
             type: "crypto",
             supported_resolutions: [
               "1S",
@@ -102,15 +141,18 @@ const MyTradingView = ({
           });
         }, 0);
       },
-      getBars: (symbolInfo, resolution, periodParams, onResult, onError) => {
+      getBars: (symbolInfo, resolution, periodParams, onResult) => {
         setTimeout(() => {
-          let bars = [];
+          const sourceData =
+            symbolInfo.name === "SECONDARY"
+              ? secondaryOhlcvData || []
+              : ohlcvData;
 
-          bars = ohlcvData
+          const bars = sourceData
             .filter(
               (bar) =>
-                bar.time * 1000 >= periodParams.from * 1000 &&
-                bar.time * 1000 <= periodParams.to * 1000
+                bar.time >= periodParams.from &&
+                bar.time <= periodParams.to
             )
             .map((bar) => ({
               time: bar.time * 1000,
@@ -199,6 +241,11 @@ const MyTradingView = ({
       autosize: chartOptions.autosize,
       timezone: "Etc/UTC",
       theme: theme || "dark",
+      custom_formatters: {
+        priceFormatterFactory: () => ({
+          format: (price: number) => formatChart(price)
+        })
+      },
     };
 
     myWidget.current = new TradingViewWidget(widgetOptions);
@@ -228,8 +275,38 @@ const MyTradingView = ({
         tokenExchange
       );
       myWidget.current.activeChart().resetData();
-    }
+      }
   }, [ohlcvData, tokenDescription, tokenExchange, chartIsReady]);
+
+useEffect(() => {
+  if (!chartIsReady) return;
+
+  const chart = myWidget.current.activeChart();
+
+  // Remove old study
+  if (compareStudyRef.current) {
+    chart.removeEntity(compareStudyRef.current);
+    compareStudyRef.current = null;
+  }
+
+  if (!secondaryOhlcvData?.length) return;
+
+  chart.createStudy(
+    "Compare",
+    false,
+    false,
+    ["SECONDARY"],
+    {
+      "compare.mode": 0,       // 🔥 prevents percentage switch
+      "plot.color": "#FF3B3B",
+      "plot.linewidth": 2,
+      "priceScale": "new-right",      // 🔥 separate scale
+    }
+  ).then((studyId: string) => {
+    compareStudyRef.current = studyId;
+  });
+
+}, [secondaryOhlcvData, chartIsReady]);
 
   return <div ref={chartContainerRef} className={"TVChartContainer"} />;
 };
